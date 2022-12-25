@@ -1,0 +1,10 @@
+0:
+  name: '&6&lJouer &8» &7(Clique Droit)'
+  item: 'golden_axe'
+  lore: ''
+  action: 'run:play'
+8:
+  name: '&c&lRetour au Lobby &8» &7(Clique Droit)'
+  item: 'red_bed'
+  lore: ''
+  action: '/lobby'

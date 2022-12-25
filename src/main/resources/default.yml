@@ -1,0 +1,17 @@
+0:
+  name: '&eEpée'
+  item: 'stone_sword'
+  lore: ''
+  action: ''
+  unbreakable: true
+1:
+  name: '&eSniper'
+  item: 'bow'
+  lore: ''
+  action: ''
+  unbreakable: true
+2:
+  name: '&7Flèche'
+  item: 'arrow'
+  lore: ''
+  action: ''

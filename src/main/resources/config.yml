@@ -1,0 +1,61 @@
+npc-cosmetics: 0
+npc-boutique: 401
+npc-edit-kit: 245
+
+spawn:
+  world: world
+  x: -127.5
+  y: 216
+  z: 3.5
+  yaw: 0
+  pitch: 0
+
+pos-number: 20
+pos:
+  1:
+    world: world
+    x: 0
+    y: 0
+    z: 0
+    yaw: 0
+    pitch: 0
+  2:
+    world: world
+    x: 0
+    y: 0
+    z: 0
+    yaw: 0
+    pitch: 0
+  3:
+    world: world
+    x: 0
+    y: 0
+    z: 0
+    yaw: 0
+    pitch: 0
+
+region:
+  spawn-void:
+    pos1:
+      world: world
+      x: 0
+      y: 0
+      z: 0
+    pos2:
+      world: world
+      x: 0
+      y: 0
+      z: 0
+  game-void:
+    pos1:
+      world: world
+      x: 8
+      y: 128
+      z: 499
+    pos2:
+      world: world
+      x: 208
+      y: 121
+      z: 299
+
+

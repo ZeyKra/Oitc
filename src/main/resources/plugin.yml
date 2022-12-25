@@ -1,0 +1,11 @@
+name: Oitc
+version: '1.0'
+main: net.velosia.oitc.Oitc
+api-version: 1.16
+authors: [ Zeykra_ ]
+commands:
+  oitc:
+    description: "command principale du plugin oitc"
+softdepend:
+  - HolographicDisplays
+  - Citizens
