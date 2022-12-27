@@ -1,2 +1,0 @@
-# Oitc
-Plugin Oitc Java

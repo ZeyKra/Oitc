@@ -1,17 +1,13 @@
 package net.velosia.oitc.events;
 
 import net.velosia.oitc.Oitc;
-import net.velosia.oitc.enums.EInventory;
-import net.velosia.oitc.enums.Update;
 import net.velosia.oitc.enums.Yaml;
 import net.velosia.oitc.managers.OitcManager;
 import net.velosia.oitc.managers.PlayerManager;
-import net.velosia.oitc.managers.ScoreboardManager;
 import net.velosia.oitc.objects.OitcPlayer;
 import net.velosia.oitc.util.Lang;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -24,7 +20,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class PlayerEvent implements Listener {
 
@@ -34,7 +29,7 @@ public class PlayerEvent implements Listener {
 
         OitcManager.createOitcPlayer(player);
 
-        player.sendTitle(Lang.format(Yaml.LANG.getString("message-join-title")), Lang.format(Yaml.LANG.getString("message-join-subtitle")), 10, 20, 20);
+        player.sendTitle(Lang.format(Yaml.LANG.getString("message-join-title")), Lang.format(Yaml.LANG.getString("message-join-subtitle")));
 
         PlayerManager.spawn(player);
     }
@@ -59,7 +54,7 @@ public class PlayerEvent implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void AutoRespawn(PlayerDeathEvent event) {
-        Bukkit.getScheduler().runTask(Oitc.Instance, () -> event.getEntity().spigot().respawn());
+        Bukkit.getScheduler().runTask(Oitc.instance, () -> event.getEntity().spigot().respawn());
     }
 
     @EventHandler(priority = EventPriority.HIGH)

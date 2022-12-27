@@ -45,14 +45,26 @@
                                     <!-- Replace 'com.yourpackage' with the package of your plugin ! -->
                                     <shadedPattern>net.velosia.fastboard</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>de.slikey</pattern>
+                                    <shadedPattern>my.own.plugin.namespace.slikey</shadedPattern>
+                                </relocation>
                             </relocations>
+                            <filters>
+                                <filter>
+                                    <artifact>com.elmakers.mine.bukkit:EffectLib</artifact>
+                                    <excludes>
+                                        <exclude>plugin.yml</exclude>
+                                        <exclude>META-INF/MANIFEST.MF</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                             <artifactSet>s>
                                 <excludes>
                                     <exclude>net.citizensnpcs</exclude>
                                 </excludes>
                             </artifactSet>
                         </configuration>
-
                     </execution>
                 </executions>
             </plugin>
@@ -90,6 +102,10 @@
             <id>codemc-repo</id>
             <url>https://repo.codemc.io/repository/maven-public/</url>
         </repository>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/Slikey/EffectLib</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -102,7 +118,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.16.5-R0.1-SNAPSHOT</version>
+            <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -115,6 +131,12 @@
             <artifactId>holographicdisplays-api</artifactId>
             <version>3.0.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.elmakers.mine.bukkit</groupId>
+            <artifactId>EffectLib</artifactId>
+            <version>9.0</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.citizensnpcs</groupId>

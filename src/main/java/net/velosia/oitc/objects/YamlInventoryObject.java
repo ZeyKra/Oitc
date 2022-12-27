@@ -103,7 +103,7 @@ public class YamlInventoryObject {
             meta.setDisplayName(Lang.format(getName()));
         }
 
-        meta.setUnbreakable(unbreakable);
+        meta.spigot().setUnbreakable(unbreakable);
 
         item.setAmount(1);
         item.setItemMeta(meta);
@@ -127,7 +127,7 @@ public class YamlInventoryObject {
             meta.setDisplayName(Lang.format(getName()));
         }
 
-        meta.setUnbreakable(unbreakable);
+        meta.spigot().setUnbreakable(unbreakable);
 
         item.setAmount(1);
         item.setItemMeta(meta);
@@ -145,7 +145,7 @@ public class YamlInventoryObject {
     }
 
     public void generatePlayerHead(Player player) {
-        ItemStack skull = new ItemStack(Material.LEGACY_SKULL_ITEM, 1, (byte) 3);
+        ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
         skullMeta.setOwner(player.getName());
         skull.setItemMeta(skullMeta);
@@ -153,7 +153,7 @@ public class YamlInventoryObject {
     }
 
     private ItemStack makeSkull(String base64EncodedString) {
-        final ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
+        final ItemStack skull = new ItemStack(Material.SKULL);
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         assert meta != null;
         GameProfile profile = new GameProfile(UUID.randomUUID(), null);

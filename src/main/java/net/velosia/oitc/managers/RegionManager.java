@@ -26,7 +26,7 @@ public class RegionManager {
                 }
 
             }
-        }.runTaskTimerAsynchronously(Oitc.Instance, 0, 2);
+        }.runTaskTimerAsynchronously(Oitc.instance, 0, 2);
     }
 
     public static void generateCuboids() {

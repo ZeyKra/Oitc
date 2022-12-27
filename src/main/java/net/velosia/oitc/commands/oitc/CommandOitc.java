@@ -2,6 +2,9 @@ package net.velosia.oitc.commands.oitc;
 
 import net.velosia.oitc.commands.SubCommand;
 import net.velosia.oitc.commands.oitc.subcommands.SubCommandAddpos;
+import net.velosia.oitc.commands.oitc.subcommands.SubCommandDebug;
+import net.velosia.oitc.commands.oitc.subcommands.SubCommandReload;
+import net.velosia.oitc.commands.oitc.subcommands.SubCommandTest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,6 +21,9 @@ public class CommandOitc implements CommandExecutor  {
     public CommandOitc() {
 
         subCommands.add(new SubCommandAddpos());
+        subCommands.add(new SubCommandDebug());
+        subCommands.add(new SubCommandReload());
+        subCommands.add(new SubCommandTest());
     }
 
     @Override

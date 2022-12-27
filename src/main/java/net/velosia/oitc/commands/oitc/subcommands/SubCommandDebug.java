@@ -2,20 +2,22 @@ package net.velosia.oitc.commands.oitc.subcommands;
 
 import net.velosia.oitc.commands.SubCommand;
 import net.velosia.oitc.enums.Yaml;
-import org.bukkit.Material;
+import net.velosia.oitc.managers.OitcManager;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.defaults.SaveCommand;
 import org.bukkit.entity.Player;
 
-public class SubCommandAddpos extends SubCommand {
+public class SubCommandDebug extends SubCommand {
 
     @Override
-    public String getName() { return "addpos"; }
+    public String getName() { return "debug"; }
 
     @Override
-    public String getDescription() { return "Ajouter une position aux positions aléatoires"; }
+    public String getDescription() { return "Command de debug"; }
 
     @Override
-    public String getSyntax() { return "/oitc addpos"; }
+    public String getSyntax() { return "/oitc debug (player)"; }
 
     @Override
     public Boolean isOnlyPlayerCommand() {
@@ -28,12 +30,11 @@ public class SubCommandAddpos extends SubCommand {
             sender.sendMessage("Player Only command");
             return;
         }
-        Player p = (Player) sender;
-        Yaml config = Yaml.CONFIG;
-        config.setConfigSection("pos");
 
+        Player player = (Player) sender;
+        Player target = (args.length >= 2) ? Bukkit.getPlayer(args[1]) : player;
+
+        OitcManager.getOitcPlayer(target).debugMessage(player);
     }
-
-
 
 }

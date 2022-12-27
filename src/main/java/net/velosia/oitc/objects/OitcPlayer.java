@@ -3,8 +3,8 @@ package net.velosia.oitc.objects;
 import net.velosia.oitc.managers.OitcManager;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class OitcPlayer {
 
@@ -12,7 +12,7 @@ public class OitcPlayer {
     Player player, attacker;
     int kill, death, killstreak;
 
-    List<Player> attacked = new ArrayList<>(); // Represente les joueurs qui ont était ataqué par  oitcplayer actuelement
+    Set<Player> attacked = new HashSet<>(); // Represente les joueurs qui ont était ataqué par  oitcplayer actuelement
 
     public OitcPlayer(Player player) {
         //System.out.println("tes");
@@ -29,7 +29,7 @@ public class OitcPlayer {
     public int getKillstreak() { return killstreak; }
     public Player getPlayer() { return player; }
     public Player getAttacker() { return attacker; }
-    public List<Player> getAttacked() { return attacked; }
+    public Set<Player> getAttacked() { return attacked; }
 
     //setter
     public void setKill(int kill) { this.kill = kill; }
@@ -49,17 +49,41 @@ public class OitcPlayer {
 
     public void removeAttacked(Player player) { this.attacked.remove(player); }
 
-    public void HandleAttacked(Player player) {
+
+    //Fonction qui  permet de reset l'attacker des  gens attaqué par player si leurs attacker == player
+    //Usage mort dans le  vide tout seul  après pvp
+    public void handleAttacked() {
         if(attacked.size() == 0) return;
-        for(Player p : attacked) {
-            if(!OitcManager.exists(p)) continue;
-            OitcPlayer oitcP = OitcManager.getOitcPlayer(p);
+        for(Player attackedPlayer : attacked) {
+            if(!OitcManager.exists(attackedPlayer)) continue;
+            OitcPlayer oitcP = OitcManager.getOitcPlayer(attackedPlayer);
 
             if(oitcP.getAttacker() != player) return;
-            oitcP.resetAttacked();
+            oitcP.resetAttacker();
 
         }
 
     }
 
+    public void debugMessage(Player p) {
+        p.sendMessage("--- DEBUG ---");
+        p.sendMessage("Kill : " + kill);
+        p.sendMessage("Killstreak : " + killstreak);
+        p.sendMessage("Death : " + death);
+        p.sendMessage("§7getPlayer : " + ((player != null) ? player.getName() : "§cnull"));
+        p.sendMessage("§7Attacker : " + ((attacker != null) ? attacker.getName() : "§cnull"));
+
+        StringBuilder attackedList = new StringBuilder("[]");
+        if(attacked.size() > 0) {
+            for(Player someone : attacked) {
+                attackedList.append(" ").append(someone.getName());
+            }
+        }
+        p.sendMessage("§7Attacked : " + attackedList);
+
+        p.sendMessage("--- DEBUG ---");
+
+    }
+
 }
+

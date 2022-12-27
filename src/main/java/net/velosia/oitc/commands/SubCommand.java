@@ -19,6 +19,11 @@ public abstract class SubCommand {
 
     // le code de la commande
     public abstract void perform(CommandSender sender, String args[]);
+    /*
+      * ARGS FORMAT
+      * /command subcommand args1 args2 -> args...
+      * /command   args0    args1 args2 -> args...
+    * */
 
 }
 

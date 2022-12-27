@@ -1,5 +1,7 @@
 package net.velosia.oitc.managers;
 
+import net.minecraft.server.v1_8_R3.IChatBaseComponent;
+import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import net.velosia.oitc.Oitc;
 import net.velosia.oitc.enums.Yaml;
 import net.velosia.oitc.objects.OitcPlayer;
@@ -7,6 +9,7 @@ import net.velosia.oitc.util.Lang;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -74,7 +77,7 @@ public class OitcManager {
 
         player.setLevel(killstreak);
         if(killstreak == 3 ) {
-            player.sendMessage(Yaml.LANG.getString("message-killstreak-private"));
+            player.sendMessage(Lang.format(Yaml.LANG.getString("message-killstreak-private"), killstreak));
             player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
             return;
         }
@@ -93,10 +96,18 @@ public class OitcManager {
                 break;
         }
         if(Arrays.asList(5, 10, 15,20).contains(killstreak)) {
-            Bukkit.broadcastMessage(Lang.format(Yaml.LANG.getString("message-killstreak"), killstreak));
+            String message = Lang.format(Yaml.LANG.getString("message-killstreak"), killstreak);
+            message = Lang.format(message, player);
+
+            Bukkit.broadcastMessage(Lang.format(message, killstreak));
         }
 
 
+    }
+
+    public static void sendActionBarMessage(Player p, String message) {
+        PacketPlayOutChat packet = new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + message.replace("&", "§") + "\"}"), (byte) 2);
+        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
     }
 
 

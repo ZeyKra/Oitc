@@ -1,7 +1,6 @@
 name: Oitc
-version: '1.0'
+version: '2.0.0-mc1.8'
 main: net.velosia.oitc.Oitc
-api-version: 1.16
 authors: [ Zeykra_ ]
 commands:
   oitc:

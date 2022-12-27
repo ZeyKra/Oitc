@@ -36,7 +36,7 @@ public class ScoreboardManager {
                 "",
                 "  §7Joueurs: x  ",
                 "",
-                "        §aplay.velosia.ml        "
+                "      §aplay.velosia.ml      "
         );
         ScoreboardList.put(player.getUniqueId(), board);
         return board;
@@ -50,12 +50,15 @@ public class ScoreboardManager {
         OitcPlayer oitcPlayer = OitcManager.getOitcPlayer(player);
         switch (update) {
             case KILL:
+                //System.out.println("K" + oitcPlayer.getKill());
                 getScoreboard(player).updateLine(1, "  §7Kills: §a" + oitcPlayer.getKill());
                 break;
             case DEATH:
+                //System.out.println("D" + oitcPlayer.getKill());
                 getScoreboard(player).updateLine(2, "  §7Morts: §a" + oitcPlayer.getDeath());
                 break;
             case KILLSTREAK:
+                //System.out.println("KS" + oitcPlayer.getKill());
                 getScoreboard(player).updateLine(3, "  §7Killstreak: §a" + oitcPlayer.getKillstreak());
                 break;
             case PLAYERS:

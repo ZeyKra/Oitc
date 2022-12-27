@@ -1,5 +1,6 @@
 package net.velosia.oitc;
 
+import de.slikey.effectlib.EffectManager;
 import me.filoghost.holographicdisplays.api.HolographicDisplaysAPI;
 import net.velosia.oitc.commands.oitc.CommandOitc;
 import net.velosia.oitc.enums.Yaml;
@@ -11,13 +12,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Oitc extends JavaPlugin {
 
-    public static Oitc Instance;
+    public static Oitc instance;
     public static Yaml Config;
     public static HolographicDisplaysAPI HoloAPI;
 
+    public static EffectManager effectManager;
+
     @Override
     public void onEnable() {
-        Instance = this;
+        instance = this;
 
         if (!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays")) {
             getLogger().severe("*** HolographicDisplays is not installed or not enabled. ***");
@@ -25,7 +28,7 @@ public final class Oitc extends JavaPlugin {
             this.setEnabled(false);
             return;
         }
-        HoloAPI = HolographicDisplaysAPI.get(Instance);
+        HoloAPI = HolographicDisplaysAPI.get(instance);
 
         Yaml.CONFIG.create(getLogger());
         Yaml.LANG.create(getLogger());
@@ -40,6 +43,8 @@ public final class Oitc extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new VoidEvent(), this);
 
         getCommand("oitc").setExecutor(new CommandOitc());
+
+        effectManager = new EffectManager(this, getLogger());
 
         OitcManager.generateRandomSpawn();
         OitcManager.regenerateData();

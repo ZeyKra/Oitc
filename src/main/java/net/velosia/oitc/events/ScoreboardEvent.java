@@ -33,33 +33,27 @@ public class ScoreboardEvent implements Listener {
 
     }
 
-    @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent e) {
-        if(OitcManager.getOitcPlayer(e.getEntity()) == null) return;
-        OitcPlayer oitcVictim = OitcManager.getOitcPlayer(e.getEntity());
-
-        if(oitcVictim.getAttacker() != null) return;
-
-        ScoreboardManager.updateScoreboard(oitcVictim.getPlayer(), Update.DEATH);
-
-    }
 
 
-    @EventHandler
+    /*
+    @EventHandler(priority = EventPriority.LOW)
     public void onPlayerMurder(PlayerDeathEvent e) {
-        if(OitcManager.getOitcPlayer(e.getEntity()) == null) return;
+        System.out.println("exists");
+        if(!OitcManager.exists(e.getEntity())) return;
         OitcPlayer oitcVictim = OitcManager.getOitcPlayer(e.getEntity());
-
-        if(oitcVictim.getAttacker() == null) return;
-        OitcPlayer oitcAttacker = OitcManager.getOitcPlayer(oitcVictim.getAttacker());
 
         ScoreboardManager.updateScoreboard(oitcVictim.getPlayer(), Update.DEATH);
         ScoreboardManager.updateScoreboard(oitcVictim.getPlayer(), Update.KILLSTREAK);
+
+        if(oitcVictim.getAttacker() == null) return;
+        OitcPlayer oitcAttacker = OitcManager.getOitcPlayer(oitcVictim.getAttacker());
 
         ScoreboardManager.updateScoreboard(oitcAttacker.getPlayer(), Update.KILL);
         ScoreboardManager.updateScoreboard(oitcAttacker.getPlayer(), Update.KILLSTREAK);
         oitcVictim.resetAttacker();
 
     }
+    */
+
 
 }

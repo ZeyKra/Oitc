@@ -19,8 +19,8 @@ public class ItemEvent implements Listener {
     public void onRightClick(PlayerInteractEvent event) {
 
         if(event.getAction() != Action.RIGHT_CLICK_BLOCK && event.getAction() != Action.RIGHT_CLICK_AIR) return;
-        if(event.getHand() != EquipmentSlot.HAND) return;
-        if(event.getItem() == null || event.getItem().getItemMeta() == null) return;
+        if(event.getItem() == null || !event.getItem().hasItemMeta()) return;
+        if(!event.getItem().getItemMeta().hasDisplayName()) return;
 
         String itemName = event.getItem().getItemMeta().getDisplayName();
         Player player = event.getPlayer();

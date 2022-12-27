@@ -20,7 +20,7 @@ public enum Yaml {
 
     private final String fileName;
     private final File dataFolder;
-    private final Oitc instance = Oitc.Instance;
+    private final Oitc instance = Oitc.instance;
     private final File file;
 
     public ConfigurationSection configSection;

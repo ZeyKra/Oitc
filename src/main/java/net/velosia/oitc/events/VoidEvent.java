@@ -1,9 +1,12 @@
 package net.velosia.oitc.events;
 
 import net.velosia.oitc.enums.Region;
+import net.velosia.oitc.enums.Update;
 import net.velosia.oitc.managers.OitcManager;
 import net.velosia.oitc.managers.PlayerManager;
 import net.velosia.oitc.managers.RegionManager;
+import net.velosia.oitc.managers.ScoreboardManager;
+import net.velosia.oitc.objects.OitcPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
