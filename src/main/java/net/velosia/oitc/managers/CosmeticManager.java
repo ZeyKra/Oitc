@@ -12,30 +12,37 @@ import org.bukkit.util.Vector;
 public class CosmeticManager {
 
     public static void summon(ECosmetic cosmetic, Player player) {
+        if (player == null || cosmetic == null) {
+            return;
+        }
 
         switch (cosmetic)  {
             case TETE_DE_FLAME:
-                BleedEffect bleedEffect = new BleedEffect(Oitc.effectManager);
-                bleedEffect.setEntity(player);
+                try {
+                    BleedEffect bleedEffect = new BleedEffect(Oitc.effectManager);
+                    bleedEffect.setEntity(player);
 
-                //bleedEffect.offset = new Vector(-1, -1 ,-1);
-                bleedEffect.hurt = false;
-                bleedEffect.particleCount = 40;
-                bleedEffect.iterations = 0;
-                bleedEffect.height = 0;
+                    bleedEffect.hurt = false;
+                    bleedEffect.particleCount = 40;
+                    bleedEffect.iterations = 0;
+                    bleedEffect.height = 0;
 
-                bleedEffect.updateLocations = false;
-                bleedEffect.updateDirections = false;
-                // Add a callback to the effect
-                bleedEffect.callback = () -> {
-                    player.sendMessage("finis de saigné?");
-                };
-                System.out.println(bleedEffect.height + " : " + bleedEffect.getLocation() + " : " + bleedEffect.updateLocations + " : " + bleedEffect.relativeOffset);
-                // Bleeding takes 15 seconds
-                // period * iterations = time of effect
-                bleedEffect.start();
-
+                    bleedEffect.updateLocations = false;
+                    bleedEffect.updateDirections = false;
+                    
+                    // Add a callback to the effect
+                    bleedEffect.callback = () -> {
+                        // Localize this message or remove if not needed
+                        player.sendMessage("Bleeding effect finished");
+                    };
+                    
+                    // Start the bleeding effect (takes 15 seconds)
+                    // period * iterations = time of effect
+                    bleedEffect.start();
+                } catch (Exception e) {
+                    Oitc.instance.getLogger().warning("Failed to create bleeding effect for player " + player.getName() + ": " + e.getMessage());
+                }
+                break;
         }
-
     }
 }

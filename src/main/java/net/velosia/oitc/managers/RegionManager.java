@@ -12,19 +12,16 @@ import java.util.Map;
 
 public class RegionManager {
 
-    private static Map<Region, Cuboid> RegionMap = new HashMap<>();
-    public static int VoidRunnableID;
+    private static Map<Region, Cuboid> regionMap = new HashMap<>();
+    public static int voidRunnableID;
     @Deprecated
     public static void initVoidRunnable() {
         new BukkitRunnable() {
             @Override
             public void run() {
-                VoidRunnableID = this.getTaskId();
-                for(Map.Entry<Region, Cuboid> entry : RegionMap.entrySet()) {
-                    System.out.println();
-
-                }
-
+                voidRunnableID = this.getTaskId();
+                // TODO: Implement void region checking logic
+                // This method is deprecated and should be removed in future versions
             }
         }.runTaskTimerAsynchronously(Oitc.instance, 0, 2);
     }
@@ -33,13 +30,20 @@ public class RegionManager {
         Yaml config = Yaml.CONFIG;
 
         config.setConfigSection("region.spawn-void");
-        RegionMap.put(Region.SPAWN, new Cuboid(config.getLoc("pos1"), config.getLoc("pos2")));
+        Location pos1 = config.getLoc("pos1");
+        Location pos2 = config.getLoc("pos2");
+        if (pos1 != null && pos2 != null) {
+            regionMap.put(Region.SPAWN, new Cuboid(pos1, pos2));
+        }
 
         config.resetConfigSection();
 
         config.setConfigSection("region.game-void");
-        RegionMap.put(Region.GAME, new Cuboid(config.getLoc("pos1"), config.getLoc("pos2")));
-        //System.out.println("loc" + config.getLoc("pos1") + " : " +  config.getLoc("pos2"));
+        pos1 = config.getLoc("pos1");
+        pos2 = config.getLoc("pos2");
+        if (pos1 != null && pos2 != null) {
+            regionMap.put(Region.GAME, new Cuboid(pos1, pos2));
+        }
         config.resetConfigSection();
     }
 
@@ -48,7 +52,7 @@ public class RegionManager {
     }
 
     public static Cuboid getRegionCuboid(Region aRegion) {
-        return RegionMap.get(aRegion);
+        return regionMap.get(aRegion);
     }
 
 

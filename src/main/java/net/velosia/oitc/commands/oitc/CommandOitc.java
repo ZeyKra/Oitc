@@ -14,12 +14,10 @@ import java.util.ArrayList;
 
 public class CommandOitc implements CommandExecutor  {
 
-    //Class permettant de gerer les sous-commands/ arguments de celle si
-
+    // Class for managing sub-commands and their arguments
     private ArrayList<SubCommand> subCommands = new ArrayList<>();
 
     public CommandOitc() {
-
         subCommands.add(new SubCommandAddpos());
         subCommands.add(new SubCommandDebug());
         subCommands.add(new SubCommandReload());
@@ -33,30 +31,29 @@ public class CommandOitc implements CommandExecutor  {
             Player p = (Player) sender;
 
             if (args.length > 0){
-                for (int i = 0; i < getSubcommands().size(); i++){
-                    if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())){
-                        getSubcommands().get(i).perform(p, args);
+                for (SubCommand subCommand : subCommands){
+                    if (args[0].equalsIgnoreCase(subCommand.getName())){
+                        subCommand.perform(p, args);
+                        return true;
                     }
                 }
-            }else if(args.length == 0){
+                p.sendMessage("Unknown subcommand: " + args[0]);
+            } else {
                 p.sendMessage("--------------------------------");
-                for (int i = 0; i < getSubcommands().size(); i++){
-                    p.sendMessage(getSubcommands().get(i).getSyntax() + " - " + getSubcommands().get(i).getDescription());
+                for (SubCommand subCommand : subCommands){
+                    p.sendMessage(subCommand.getSyntax() + " - " + subCommand.getDescription());
                 }
                 p.sendMessage("--------------------------------");
             }
-
+        } else {
+            sender.sendMessage("This command can only be executed by players.");
         }
-
 
         return true;
     }
 
-    public ArrayList<SubCommand> getSubcommands(){
-        return subCommands;
+    public ArrayList<SubCommand> getSubCommands() { 
+        return subCommands; 
     }
-
-
-    public ArrayList<SubCommand> getSubCommands() { return subCommands; }
 
 }

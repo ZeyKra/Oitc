@@ -13,9 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Oitc extends JavaPlugin {
 
     public static Oitc instance;
-    public static Yaml Config;
     public static HolographicDisplaysAPI HoloAPI;
-
     public static EffectManager effectManager;
 
     @Override
@@ -59,6 +57,11 @@ public final class Oitc extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        // Clean up resources
+        if (effectManager != null) {
+            effectManager.dispose();
+        }
+        
+        getLogger().info("Oitc plugin has been disabled.");
     }
 }

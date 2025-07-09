@@ -11,25 +11,31 @@ import org.bukkit.entity.Player;
 public class PlayerManager {
 
     public static void setup(Player player) {
-
+        if (player == null) {
+            return;
+        }
+        
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
         EInventory.DEFAULT.Set(player);
         player.teleport(OitcManager.getRandomSpawn());
 
-        player.setHealth(player.getHealthScale());
+        player.setHealth(player.getMaxHealth());
         player.setFoodLevel(20);
         player.setGameMode(GameMode.SURVIVAL);
-
     }
 
     public static void spawn(Player player) {
+        if (player == null) {
+            return;
+        }
+        
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
         EInventory.JOIN.Set(player);
         player.teleport(Yaml.CONFIG.getLocWithDirection("spawn"));
 
-        player.setHealth(player.getHealthScale());
+        player.setHealth(player.getMaxHealth());
         player.setFoodLevel(20);
         player.setGameMode(GameMode.ADVENTURE);
     }
@@ -42,7 +48,7 @@ public class PlayerManager {
         victim.setKillstreak(0);
         ScoreboardManager.updateScoreboard(victim.getPlayer(), Update.DEATH);
         ScoreboardManager.updateScoreboard(victim.getPlayer(), Update.KILLSTREAK);
-        //remive a nv
+        // Remove arrow level from player
         victim.getPlayer().setLevel(0);
 
         victim.handleAttacked();
@@ -53,8 +59,7 @@ public class PlayerManager {
         OitcPlayer attacker = OitcManager.getOitcPlayer(victim.getAttacker());
         victim.resetAttacker();
 
-
-        //ajout des  stats / scoreboard update
+        // Add stats and update scoreboard for attacker
         attacker.addKill(1);
         attacker.addKillstreak(1);
         OitcManager.handleKillStreak(attacker.getPlayer());
@@ -62,23 +67,26 @@ public class PlayerManager {
         ScoreboardManager.updateScoreboard(attacker.getPlayer(), Update.KILL);
         ScoreboardManager.updateScoreboard(attacker.getPlayer(), Update.KILLSTREAK);
 
-        //remise a niveau du attacker
-        attacker.getPlayer().setHealth(attacker.getPlayer().getHealthScale());
+        // Restore attacker's health
+        attacker.getPlayer().setHealth(attacker.getPlayer().getMaxHealth());
         attacker.getPlayer().getInventory().addItem(EInventory.DEFAULT.getSlot(2).getItem());
 
-        //messages
+        // Send messages to players
         String killed = Lang.format(Yaml.LANG.getString("message-killed"), attacker.getPlayer());
         killed = Lang.customFormat(killed, "{HEALTH}", "" + Math.round(attacker.getPlayer().getHealth()/2));
         OitcManager.sendActionBarMessage(victim.getPlayer(),  killed);
 
         String killer = Lang.format(Yaml.LANG.getString("message-kill"), victim.getPlayer());
         OitcManager.sendActionBarMessage(attacker.getPlayer(),  killer);
-
     }
 
 
     public static void handleRespawn(Player player) {
-
+        if (player == null) {
+            return;
+        }
+        // Teleport player to spawn and reset their state
+        setup(player);
     }
 
 
