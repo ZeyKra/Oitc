@@ -59,7 +59,7 @@
                                     </excludes>
                                 </filter>
                             </filters>
-                            <artifactSet>s>
+                            <artifactSet>
                                 <excludes>
                                     <exclude>net.citizensnpcs</exclude>
                                 </excludes>
@@ -73,7 +73,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
-                    <outputDirectory>E:\Velojia\Lobby\plugins</outputDirectory>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>

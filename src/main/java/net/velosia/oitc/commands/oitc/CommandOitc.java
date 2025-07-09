@@ -12,20 +12,37 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
+/**
+ * Main command executor for the /oitc command.
+ * Manages sub-commands and provides help information to players.
+ * 
+ * @author ZeyKra
+ */
 public class CommandOitc implements CommandExecutor  {
 
-    //Class permettant de gerer les sous-commands/ arguments de celle si
-
+    /** List of all available sub-commands */
     private ArrayList<SubCommand> subCommands = new ArrayList<>();
 
+    /**
+     * Initializes the command executor and registers all sub-commands.
+     */
     public CommandOitc() {
-
         subCommands.add(new SubCommandAddpos());
         subCommands.add(new SubCommandDebug());
         subCommands.add(new SubCommandReload());
         subCommands.add(new SubCommandTest());
     }
 
+    /**
+     * Handles the execution of the /oitc command and its sub-commands.
+     * Shows help information when no arguments are provided.
+     * 
+     * @param sender The command sender (player or console)
+     * @param command The command that was executed
+     * @param label The command label used
+     * @param args The command arguments
+     * @return true if the command was handled successfully
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -33,30 +50,34 @@ public class CommandOitc implements CommandExecutor  {
             Player p = (Player) sender;
 
             if (args.length > 0){
-                for (int i = 0; i < getSubcommands().size(); i++){
-                    if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())){
-                        getSubcommands().get(i).perform(p, args);
+                for (SubCommand subCommand : subCommands){
+                    if (args[0].equalsIgnoreCase(subCommand.getName())){
+                        subCommand.perform(p, args);
+                        return true;
                     }
                 }
-            }else if(args.length == 0){
+                p.sendMessage("Unknown subcommand: " + args[0]);
+            } else {
                 p.sendMessage("--------------------------------");
-                for (int i = 0; i < getSubcommands().size(); i++){
-                    p.sendMessage(getSubcommands().get(i).getSyntax() + " - " + getSubcommands().get(i).getDescription());
+                for (SubCommand subCommand : subCommands){
+                    p.sendMessage(subCommand.getSyntax() + " - " + subCommand.getDescription());
                 }
                 p.sendMessage("--------------------------------");
             }
-
+        } else {
+            sender.sendMessage("This command can only be executed by players.");
         }
-
 
         return true;
     }
 
-    public ArrayList<SubCommand> getSubcommands(){
-        return subCommands;
+    /**
+     * Gets the list of all registered sub-commands.
+     * 
+     * @return ArrayList containing all sub-commands
+     */
+    public ArrayList<SubCommand> getSubCommands() { 
+        return subCommands; 
     }
-
-
-    public ArrayList<SubCommand> getSubCommands() { return subCommands; }
 
 }

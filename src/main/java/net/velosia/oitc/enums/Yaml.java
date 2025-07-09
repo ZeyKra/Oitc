@@ -235,7 +235,7 @@ public enum Yaml {
             setLocDirection(ymlConfig.getConfigurationSection(configSectionkey), loc);
             return;
         }
-        // si ya deja un config section bah ça cherche la key dedans example pos1/player2
+        // If there's already a config section, search for the key within it (e.g., pos1/player2)
         setLocDirection(configSection.getConfigurationSection(configSectionkey), loc);
     }
 
@@ -332,7 +332,7 @@ public enum Yaml {
      * @param slot number of the slot
      * @Author : ZeyKra_
      */
-    public YamlInventoryObject readSlot(String page, String slot) {;
+    public YamlInventoryObject readSlot(String page, String slot) {
         ConfigurationSection objectSection = ymlConfig.getConfigurationSection(page).getConfigurationSection(slot);
         YamlInventoryObject ymlGuiObject = new YamlInventoryObject(
                 Integer.parseInt(slot),
