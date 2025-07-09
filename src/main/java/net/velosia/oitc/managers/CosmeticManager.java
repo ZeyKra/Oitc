@@ -9,8 +9,20 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+/**
+ * Manages cosmetic effects for players in the OITC game.
+ * Handles the creation and management of visual effects using EffectLib.
+ * 
+ * @author ZeyKra
+ */
 public class CosmeticManager {
 
+    /**
+     * Summons a cosmetic effect for the specified player.
+     * 
+     * @param cosmetic The type of cosmetic effect to summon
+     * @param player The player to apply the effect to
+     */
     public static void summon(ECosmetic cosmetic, Player player) {
         if (player == null || cosmetic == null) {
             return;

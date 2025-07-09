@@ -8,8 +8,19 @@ import net.velosia.oitc.util.Lang;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
+/**
+ * Manages player states and actions in the OITC game.
+ * Handles player setup, spawning, death, and respawn mechanics.
+ * 
+ * @author ZeyKra
+ */
 public class PlayerManager {
 
+    /**
+     * Sets up a player for the OITC game with default inventory and state.
+     * 
+     * @param player The player to setup, must not be null
+     */
     public static void setup(Player player) {
         if (player == null) {
             return;
@@ -25,6 +36,11 @@ public class PlayerManager {
         player.setGameMode(GameMode.SURVIVAL);
     }
 
+    /**
+     * Spawns a player to the lobby/join area with appropriate inventory and settings.
+     * 
+     * @param player The player to spawn, must not be null
+     */
     public static void spawn(Player player) {
         if (player == null) {
             return;
@@ -40,6 +56,12 @@ public class PlayerManager {
         player.setGameMode(GameMode.ADVENTURE);
     }
 
+    /**
+     * Handles player death mechanics including stats updates and attacker rewards.
+     * Updates scoreboards, manages kill streaks, and sends appropriate messages.
+     * 
+     * @param player The player who died, must not be null
+     */
     public static void handleDeath(Player player) {
         if(!OitcManager.exists(player)) return;
         OitcPlayer victim = OitcManager.getOitcPlayer(player);
@@ -81,6 +103,11 @@ public class PlayerManager {
     }
 
 
+    /**
+     * Handles player respawn by resetting their state and teleporting to spawn.
+     * 
+     * @param player The player to respawn, must not be null
+     */
     public static void handleRespawn(Player player) {
         if (player == null) {
             return;

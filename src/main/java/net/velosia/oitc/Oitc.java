@@ -10,12 +10,28 @@ import net.velosia.oitc.managers.RegionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * Main plugin class for the OITC (One In The Chamber) Minecraft minigame.
+ * Handles plugin initialization, event registration, and resource management.
+ * 
+ * @author ZeyKra
+ * @version 1.0
+ */
 public final class Oitc extends JavaPlugin {
 
+    /** Plugin instance for static access */
     public static Oitc instance;
+    
+    /** API instance for HolographicDisplays integration */
     public static HolographicDisplaysAPI HoloAPI;
+    
+    /** Effect manager for particle effects */
     public static EffectManager effectManager;
 
+    /**
+     * Called when the plugin is enabled.
+     * Initializes all dependencies, configurations, and game components.
+     */
     @Override
     public void onEnable() {
         instance = this;
@@ -55,6 +71,10 @@ public final class Oitc extends JavaPlugin {
 
     }
 
+    /**
+     * Called when the plugin is disabled.
+     * Performs cleanup of resources and logs shutdown message.
+     */
     @Override
     public void onDisable() {
         // Clean up resources

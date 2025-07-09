@@ -15,45 +15,36 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
+/**
+ * Handles scoreboard-related events for players in the OITC game.
+ * Manages scoreboard creation, deletion, and updates.
+ * 
+ * @author ZeyKra
+ */
 public class ScoreboardEvent implements Listener {
 
+    /**
+     * Creates a scoreboard for a player when they join.
+     * 
+     * @param e The player join event
+     */
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-
         ScoreboardManager.createScoreboard(player);
     }
 
+    /**
+     * Removes and cleans up a player's scoreboard when they quit.
+     * 
+     * @param e The player quit event
+     */
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-
         FastBoard board = ScoreboardManager.removeScoreboard(player);
-        board.delete();
-
+        if (board != null) {
+            board.delete();
+        }
     }
-
-
-
-    /*
-    @EventHandler(priority = EventPriority.LOW)
-    public void onPlayerMurder(PlayerDeathEvent e) {
-        System.out.println("exists");
-        if(!OitcManager.exists(e.getEntity())) return;
-        OitcPlayer oitcVictim = OitcManager.getOitcPlayer(e.getEntity());
-
-        ScoreboardManager.updateScoreboard(oitcVictim.getPlayer(), Update.DEATH);
-        ScoreboardManager.updateScoreboard(oitcVictim.getPlayer(), Update.KILLSTREAK);
-
-        if(oitcVictim.getAttacker() == null) return;
-        OitcPlayer oitcAttacker = OitcManager.getOitcPlayer(oitcVictim.getAttacker());
-
-        ScoreboardManager.updateScoreboard(oitcAttacker.getPlayer(), Update.KILL);
-        ScoreboardManager.updateScoreboard(oitcAttacker.getPlayer(), Update.KILLSTREAK);
-        oitcVictim.resetAttacker();
-
-    }
-    */
-
-
 }

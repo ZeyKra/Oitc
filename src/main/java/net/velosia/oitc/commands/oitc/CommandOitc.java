@@ -12,11 +12,20 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
+/**
+ * Main command executor for the /oitc command.
+ * Manages sub-commands and provides help information to players.
+ * 
+ * @author ZeyKra
+ */
 public class CommandOitc implements CommandExecutor  {
 
-    // Class for managing sub-commands and their arguments
+    /** List of all available sub-commands */
     private ArrayList<SubCommand> subCommands = new ArrayList<>();
 
+    /**
+     * Initializes the command executor and registers all sub-commands.
+     */
     public CommandOitc() {
         subCommands.add(new SubCommandAddpos());
         subCommands.add(new SubCommandDebug());
@@ -24,6 +33,16 @@ public class CommandOitc implements CommandExecutor  {
         subCommands.add(new SubCommandTest());
     }
 
+    /**
+     * Handles the execution of the /oitc command and its sub-commands.
+     * Shows help information when no arguments are provided.
+     * 
+     * @param sender The command sender (player or console)
+     * @param command The command that was executed
+     * @param label The command label used
+     * @param args The command arguments
+     * @return true if the command was handled successfully
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -52,6 +71,11 @@ public class CommandOitc implements CommandExecutor  {
         return true;
     }
 
+    /**
+     * Gets the list of all registered sub-commands.
+     * 
+     * @return ArrayList containing all sub-commands
+     */
     public ArrayList<SubCommand> getSubCommands() { 
         return subCommands; 
     }
